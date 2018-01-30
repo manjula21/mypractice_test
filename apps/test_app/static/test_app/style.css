@@ -1,0 +1,16 @@
+.container{
+    width: available;
+    height: available;
+}
+
+.leftpane{
+    width: 50%;
+    height: available;
+    float: left;
+}
+
+.rightpane{
+    width: 50%;
+    height: available;
+    float: right;
+}

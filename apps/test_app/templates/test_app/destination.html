@@ -1,0 +1,33 @@
+<head>
+	<meta charset="UTF-8">
+	<title>User</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'test_app/style.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+    <div class="container">
+    
+            <h3>Hello {{ request.session.name }}</h3><a href="/log_out">LOGOUT</a>
+
+            
+                <h3>Destination: {{trip.destination}}</h3>
+                <p>Planned by: {{user_name}}</p>
+                <p>Travel date from:{{trip.start_date}}</p>
+                <p>Travel date to:{{trip.end_date}}</p>
+            
+
+            <p>Other users joining the trip:</p>
+                {% for user in trip.users.all %}
+                {% if user.name != user_name %}
+                    <br/> {{ user.name }} 
+                {% endif %}
+                {% endfor %}
+        
+    </div>
+    
+    {% for error in request.session.errors %}
+        <p>{{ error }}</p>
+    {% endfor %}
+
+</body>
+</html>

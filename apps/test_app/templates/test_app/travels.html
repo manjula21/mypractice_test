@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>All Users</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'test_app/style.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+	<p>Hello {{user_name}}</p>
+    
+	<h2>Your trip schedules</h2>
+	<table>
+		<thead>
+			<tr>
+				
+				<th>Destination</th>
+				<th>Travel start</th>
+				<th>Travel end</th>
+				<th>Plan</th>
+				<th>Users</th>
+				{% if this_users_level == "Admin" %}
+					<th>Actions</th>
+				{% endif %}
+			</tr>
+		</thead>
+		<tbody>
+            {% for trip in user_trips %}
+			<tr>
+                <td><a href="/trip_details/{{trip.id}}">{{trip.destination}}</a></td>
+				<td>{{trip.start_date}} </td>
+				<td>{{trip.end_date}}</td>
+				<td>{{trip.desc}}</td>
+				<td>{% for user in trip.users.all %} {{ user.user_name }}, {% endfor %} </td>
+			
+				</tr>
+            {% endfor %}
+
+            
+	</table>
+		<h2>Other users travel plans</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Users</th>
+				<th>Destination</th>
+				<th>Travel start</th>
+				<th>Travel end</th>
+				<th>Plan</th>
+				<th>Join</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+            {% for trip in all_user_trips %}
+			<tr>
+				<td> {% for user in trip.users.all %} {{ user.user_name }}, {% endfor %} </td>
+                <td><a href="/trip_details/{{trip.id}}">{{trip.destination}}</a></td>
+				<td>{{trip.start_date}}</td>
+				<td>{{trip.end_date}}</td>
+				<td>{{trip.desc}}</td>
+				<td><a href="/join_trip/{{trip.id}}">Join</a>
+				
+				</tr>
+            {% endfor %}
+
+		</tbody>
+    </table>
+    
+    <a href="/add_trip_get">ADD TRAVEL PLAN</a>
+
+</body>
+</html>

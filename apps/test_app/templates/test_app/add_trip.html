@@ -1,0 +1,30 @@
+<head>
+	<meta charset="UTF-8">
+	<title>Add trip</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'test_app/style.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+    <h2>Add a Trip</h2>
+    <form action="/add_trip_post" method="post">
+        {% csrf_token %} 
+        <label for="destination">Destination:</label>
+        <input type="text"  id="destination" name="destination" ></br></br>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description"></br></br>
+
+        <label for="travel_date_from">Travel Date From:</label>
+        <input type="Date" id="travel_date_from" name="travel_date_from"></br></br>
+        <label for="travel_date_to">Travel_Date_To:</label>
+        <input type="Date" id="travel_date_to" name="travel_date_to"></br></br>
+        
+        <input type="submit" class="button" value="ADD">
+    </form>
+    
+        {% for error in request.session.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>All Users</title>
+    <meta name="description" content="Messaging">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'test_app/style.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+    <div class="container">
+        <div class="rightpane">
+            <h3>Sign In</h3>
+            <form action="/user_login" method="post">
+                {% csrf_token %} 
+                <label for="user_name">User Name:</label>
+                <input type="text" name="user_name"></br></br>
+                <label for="password">Password:</label>
+                <input type="password" name="password"></br></br>
+                <input type="submit" class="button" value="Login">
+            </form>
+        </div>
+        <div class="leftpane">
+        	<h2>Welcome</h2>
+            <h3>Registration</h3>
+            <form action="/create_user" method="post">
+                {% csrf_token %} 
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" ></br></br>
+                <label for="user_name">User Name:</label>
+                <input type="text" id="user_name" name="user_name"></br></br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"></br></br>
+                <p>*password should be atleast 8 characters</p>
+                <label for="pw_confirm">PW Confirm:</label>
+                <input type="password" class="entry" id="pw_confirm" name="pw_confirm"></br></br>
+                <input type="submit" class="button" value="Register">
+            </form>
+        </div>
+    </div>
+    
+        {% for error in request.session.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+
+</body>
+</html>
